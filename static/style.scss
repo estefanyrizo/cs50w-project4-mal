@@ -1,0 +1,146 @@
+$mainFont: 'Open Sans', sans-serif;
+$mainColor: #333333;
+
+// *{padding: 0px; margin: 0px;}
+
+body {
+	background-image: linear-gradient( 135deg, #FAB2FF 10%, #1904E5 100%);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	font-family: $mainFont;
+	color: $mainColor;
+}
+
+.box-form {
+	margin-top: 8%;
+	margin-left: 8%;
+	width: 80%;	
+	height: 100%;
+	background: #FFFFFF;
+	border-radius: 10px;
+	overflow: hidden;	
+	display: flex;
+	
+	
+	@media (max-width: 980px) {
+		flex-flow:wrap;
+		text-align: center;
+		align-content: center;
+		align-items: center;
+	}
+
+	
+	div{height: auto;}
+	
+	.left{
+		color: #FFFFFF;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-image: url("https://image.freepik.com/vector-gratis/fondo-escenario-luces-neon_23-2148300642.jpg");
+		overflow: hidden;
+
+		// overlay
+		.overlay {
+			padding: 30px;
+			width: 100%;
+			height: 100%;
+			background: #5961f9ad;
+			overflow: hidden;
+			box-sizing: border-box;
+			
+			h1{
+				font-size: 10vmax;
+				line-height: 1;
+				font-weight: 900;
+				margin-top: 40px;
+				margin-bottom: 20px;
+			}
+			
+			p {
+				margin-top: 30px; 
+				font-weight: 100;
+				text-align: end;
+				font-family: Georgia, 'Times New Roman', Times, serif;
+				}
+				
+		}
+	}
+	
+	.right 
+	{
+		padding: 40px;
+		overflow: hidden;
+						
+	@media (max-width: 980px) {width: 100%;}
+
+		h5{
+			font-size: 6vmax;
+			line-height: 0;
+			// margin-bottom: 30px;
+			
+
+		}
+		
+		p{
+			font-size: 14px; 
+			color: #646464;
+		}
+		
+		.inputs{overflow: hidden;}
+		
+		input{
+			width: 100%;
+			padding: 10px;
+			margin-top: 25px;
+			font-size: 16px;
+			border: none;
+			outline: none;
+			border-bottom: 2px solid #B0B3B9;
+		}
+		
+		button {
+			color: #fff;
+			justify-content: center;
+			font-size: 16px;
+			padding: 12px 35px;
+			border-radius: 50px;
+			border: 0; outline: 0;
+		    box-shadow: 0px 4px 20px 0px #111111a6;
+			background-image: linear-gradient( 135deg, #2c2c2c 10%, #1e1f1e 100%);
+			display: flex;
+			justify-items: center;
+		}
+	}	
+}
+
+.form-inline .form-control {
+	display: inline-block;
+	width: 50vw;
+}
+
+.navbar{
+	background-color: transparent;
+	i{
+		color:#FFFFFF
+	}
+}
+.dropdown-menu.show {
+	right: 5px;
+	left: auto; 
+	border-color: transparent;
+}
+
+.clases{
+	margin-top: 5%;
+}
+
+.error{
+	background-color: #FFFFFF;
+	color: red;
+}
+
+.exito{
+	background-color: #FFFFFF;
+	color: green;
+}

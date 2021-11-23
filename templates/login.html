@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{%block title%}
+
+Login
+
+{% endblock%}
+
+{% block main%}
+
+
+<div class="box-form">
+	<div class="left">
+		<div class="overlay">
+		<h1>Asi se baila</h1>
+		<p>La vida es corta y siempre habrá platos sucios, así que vamos a bailar.</p>
+		</div>
+	</div>
+	
+	
+		<div class="right mt-5">
+		<h5>Login</h5>
+		<br><br>
+		<form action="/login" method="post">
+		<div class="inputs">
+			<input type="text" placeholder="username" name="username" required>
+			<br>
+			<input type="password" placeholder="contraseña" name="password" required>
+		</div>	
+			
+			<br><br>
+
+			<br>
+			<button type="submit">Login</button>
+		</form>
+
+			<br><br>
+			<br>	
+			<p>¿No tienes una cuenta? <a href="/register">Crea tu cuenta</a> toma menos de un minuto</p>
+	</div>
+	
+</div>
+{% endblock %}
