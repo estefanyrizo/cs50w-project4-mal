@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{%block title%}
+
+Mis coreografias
+
+{% endblock%}
+
+{% block main%}
+<br></br>
+<div class="content">
+    <div class="row mt-5">
+      <div class="col-md-12 mt-5">
+        <div class="card ">
+          <div class="card-header">
+            <h4 class="card-title">Mis coreografias</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table tablesorter " id="">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>
+                      Portada
+                    </th>
+                    <th>
+                      Titulo
+                    </th>
+                    <th>
+                      Descripcion
+                    </th>
+                    <th>
+                      Coreografo
+                    </th>
+                    <th>
+                        Estado
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for coreo in coreos%}
+                  <tr>
+                    <td>
+                      <img src="{{coreo["portada"]}}" class="portadaR">
+                    </td>
+                    <td>
+                      {{coreo["titulo"]}}
+                    </td>
+                    <td>
+                      {{coreo["descripcion"]}}
+                    </td>
+                    <td>
+                      {{coreo["coreografo"]}}
+                    </td>
+                    {% if coreo["estado"] == true %}
+                    <td>
+                        En linea
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="/coreografia/{{coreo["id"]}}"><i class="tim-icons icon-triangle-right-17"></i></a>
+                    </td>
+                    {% else %}
+                    <td>
+                        Esperando aprobación
+                    </td>
+                    {% endif %}
+                    <td>
+                      <a class="btn btn-primary" href="/eliminado?id={{coreo["id"]}}"><i class="tim-icons icon-trash-simple"></i></a>
+                  </td>
+                  </tr>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+{% endblock %}

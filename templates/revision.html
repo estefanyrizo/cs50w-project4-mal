@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{%block title%}
+
+Revisar coreos
+
+{% endblock%}
+
+{% block main%}
+<BR></BR>
+<div class="content">
+    <div class="row mt-5">
+      <div class="col-md-12 mt-5">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title"> Coreografias en espera de revision</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table tablesorter " id="">
+                <thead class=" text-primary">
+                  <tr>
+                    <th>
+                      Portada
+                    </th>
+                    <th>
+                      Titulo
+                    </th>
+                    <th>
+                      Descripcion
+                    </th>
+                    <th>
+                      Coreografo
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for coreo in coreos%}
+                  <tr>
+                    <td>
+                      <img src="{{coreo["portada"]}}" class="portadaR">
+                    </td>
+                    <td>
+                      {{coreo["titulo"]}}
+                    </td>
+                    <td>
+                      {{coreo["descripcion"]}}
+                    </td>
+                    <td>
+                      {{coreo["coreografo"]}}
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="/aprobado?id={{coreo["id"]}}"><i class="tim-icons icon-check-2"></i></a>
+                    </td>
+                    <td>
+                      <a class="btn btn-primary" href="/eliminado?id={{coreo["id"]}}"><i class="tim-icons icon-trash-simple"></i></a>
+                  </td>
+                  </tr>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div>
+{% endblock %}

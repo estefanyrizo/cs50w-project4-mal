@@ -2,64 +2,288 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> {% block title %} {% endblock %}</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> {% block title %} {% endblock %}</title>
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script src="https://kit.fontawesome.com/e1b504be8a.js" crossorigin="anonymous"></script>
+    <link href="static/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/e1b504be8a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link href="/static/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="/static/assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
 
-  <link href="/static/style.css" rel="stylesheet">
-  <link rel="shortcut icon" href="/static/imagenes/favicon.png">
+    <link href="/static/style.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/static/imagenes/favicon.png">
 
 </head>
 
 <body>
-  {% if session.user_id %}
-  <nav class="navbar navbar-dark">
-      <a class="navbar-brand" href="/">Home</a>
-
-    <div class="nav-item dropleft">
-      <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user"></i>
-      </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="/micuenta">Mi cuenta</a>
-          <a class="dropdown-item" href="/logout">Cerrar sesión</a>
+    {% if session.user_id %}
+    <nav class="navbar navbar-expand-lg navbar-absolute navbar-transparent">
+        <div class="container-fluid">
+            <div class="navbar-wrapper">
+                <div class="navbar-toggle d-inline">
+                </div>
+                <a class="navbar-brand" href="/">Asi se baila</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+                <span class="navbar-toggler-bar navbar-kebab"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navigation">
+                <ul class="navbar-nav ml-auto">
+                    <li class="dropdown nav-item">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <i class="tim-icons icon-shape-star"></i>
+                            <p class="d-lg-none">
+                                Coreografias
+                            </p>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                            <li class="nav-link"><a href="/subir-coreografia" class="nav-item dropdown-item">Subir
+                                    coreografia</a>
+                            </li>
+                            <li class="nav-link"><a href="/mis-coreografias" class="nav-item dropdown-item">Ver
+                                    mis coreografias</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {% if session["admin"] == true %}
+                    <li class="dropdown nav-item">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <i class="tim-icons icon-key-25"></i>
+                            <p class="d-lg-none">
+                                Admin
+                            </p>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-right dropdown-navbar">
+                            <li class="nav-link"><a href="/registrar" class="nav-item dropdown-item">Agregar un nuevo
+                                    administrador</a></li>
+                            <li class="nav-link"><a href="/revision" class="nav-item dropdown-item">Revisar
+                                    coreografias</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    <li class="dropdown nav-item">
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                            <div class="photo">
+                                <img src="{{session[" perfil"]}}" alt="Profile Photo">
+                            </div>
+                            <b class="caret d-none d-lg-block d-xl-block"></b>
+                            <p class="d-lg-none">
+                                Usuario
+                            </p>
+                        </a>
+                        <ul class="dropdown-menu dropdown-navbar">
+                            <li class="nav-link"><a href="/micuenta" class="nav-item dropdown-item">Perfil</a></li>
+                            <li class="nav-link"><a href="/actualizarcontraseña"
+                                    class="nav-item dropdown-item">Actualizar contraseña</a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li class="nav-link"><a href="/logout" class="nav-item dropdown-item">Cerrar sesion</a></li>
+                        </ul>
+                    </li>
+                    <li class="separator d-lg-none"></li>
+                </ul>
+            </div>
         </div>
-      </div>
-
-      {% endif %}
-    </div>
-  </nav>
+    </nav>
+    {% endif %}
 
 
-  </div>
-  </nav>
+    <main class="container-fluid pb-5 pt-5">
+        {% block main %}{% endblock %}
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+        <script src="/static/assets/js/black-dashboard.min.js?v=1.0.0"></script>
+        <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="/static/script.js"></script>
 
-  {% if get_flashed_messages() %}
-  <header>
-      {% with messages = get_flashed_messages(with_categories=true) %}
-      {% for category, message in messages %}
-        <div class="{{ category }} text-center p-3">{{ message }}</div>
-      {% endfor %}
-    {% endwith %}
-  </header>
-  {% endif %}
+        <div class="fixed-plugin">
+            <div class="dropdown show-dropdown">
+                <a href="#" data-toggle="dropdown">
+                    <i class="fa fa-cog fa-2x"> </i>
+                </a>
+                <ul class="dropdown-menu">
 
-  <main class="container-fluid pb-5">
-    {% block main %}{% endblock %}
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
+                    <li class="adjustments-line text-center color-change">
+                        <span class="color-label">LIGHT MODE</span>
+                        <span class="badge light-badge mr-2"></span>
+                        <span class="badge dark-badge ml-2"></span>
+                        <span class="color-label">DARK MODE</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $().ready(function () {
+                    $sidebar = $('.sidebar');
+                    $navbar = $('.navbar');
+                    $main_panel = $('.main-panel');
+
+                    $full_page = $('.full-page');
+
+                    $sidebar_responsive = $('body > .navbar-collapse');
+                    sidebar_mini_active = true;
+                    white_color = false;
+
+                    window_width = $(window).width();
+
+                    fixed_plugin_open = $('.sidebar .sidebar-wrapper .nav li.active a p').html();
+
+
+                    $('.fixed-plugin a').click(function (event) {
+                        if ($(this).hasClass('switch-trigger')) {
+                            if (event.stopPropagation) {
+                                event.stopPropagation();
+                            } else if (window.event) {
+                                window.event.cancelBubble = true;
+                            }
+                        }
+                    });
+
+                    $('.fixed-plugin .background-color span').click(function () {
+                        $(this).siblings().removeClass('active');
+                        $(this).addClass('active');
+
+                        var new_color = $(this).data('color');
+
+                        if ($sidebar.length != 0) {
+                            $sidebar.attr('data', new_color);
+                        }
+
+                        if ($main_panel.length != 0) {
+                            $main_panel.attr('data', new_color);
+                        }
+
+                        if ($full_page.length != 0) {
+                            $full_page.attr('filter-color', new_color);
+                        }
+
+                        if ($sidebar_responsive.length != 0) {
+                            $sidebar_responsive.attr('data', new_color);
+                        }
+                    });
+
+                    $('.switch-sidebar-mini input').on("switchChange.bootstrapSwitch", function () {
+                        var $btn = $(this);
+
+                        if (sidebar_mini_active == true) {
+                            $('body').removeClass('sidebar-mini');
+                            sidebar_mini_active = false;
+                            blackDashboard.showSidebarMessage('Sidebar mini deactivated...');
+                        } else {
+                            $('body').addClass('sidebar-mini');
+                            sidebar_mini_active = true;
+                            blackDashboard.showSidebarMessage('Sidebar mini activated...');
+                        }
+
+                        // we simulate the window Resize so the charts will get updated in realtime.
+                        var simulateWindowResize = setInterval(function () {
+                            window.dispatchEvent(new Event('resize'));
+                        }, 180);
+
+                        // we stop the simulation of Window Resize after the animations are completed
+                        setTimeout(function () {
+                            clearInterval(simulateWindowResize);
+                        }, 1000);
+                    });
+
+                    $('.switch-change-color input').on("switchChange.bootstrapSwitch", function () {
+                        var $btn = $(this);
+
+                        if (white_color == true) {
+
+                            $('body').addClass('change-background');
+                            setTimeout(function () {
+                                $('body').removeClass('change-background');
+                                $('body').removeClass('white-content');
+                            }, 900);
+                            white_color = false;
+                        } else {
+
+                            $('body').addClass('change-background');
+                            setTimeout(function () {
+                                $('body').removeClass('change-background');
+                                $('body').addClass('white-content');
+                            }, 900);
+
+                            white_color = true;
+                        }
+
+
+                    });
+
+                    $('.light-badge').click(function () {
+                        $('body').addClass('white-content');
+                    });
+
+                    $('.dark-badge').click(function () {
+                        $('body').removeClass('white-content');
+                    });
+                });
+            });
+        </script>
+        <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+        <script>
+            window.TrackJS &&
+                TrackJS.install({
+                    token: "ee6fab19c5a04ac1a32a645abde4613a",
+                    application: "black-dashboard-free"
+                });
+        </script>
+
+        {% if get_flashed_messages() %} {% with messages = get_flashed_messages(with_categories=true) %} {% for
+        category, m in messages%} {% if category == "exito"%}
+        <script>
+            swal.fire({
+                "title": "Felicitaciones",
+                "text": "{{m}}",
+                "icon": "success"
+            })
+        </script>
+        {% endif %} {% if category == "error"%}
+        <script>
+            swal.fire({
+                "title": "Oops",
+                "text": "{{m}}",
+                "icon": "error"
+            })
+        </script>
+
+        {% endif %}
+        {% if category == "triste"%}
+        <script>
+            swal.fire({
+                "title": "Pues tu sabras",
+                "text": "{{m}}",
+                "icon": "sad"
+            })
+        </script>
+        {% endif %} {% endfor %} {% endwith %} {% endif %}
 </body>
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="copyright">
+            © 2021 creado por <i class="tim-icons icon-heart-2"></i>
+            <a href="https://www.instagram.com/estefany_rizo20/" target="_blank">Estefany Rizo</a> para Web50xni.
+        </div>
+    </div>
+</footer>
 
 </html>

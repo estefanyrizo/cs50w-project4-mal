@@ -18,23 +18,21 @@ Login
 	</div>
 	
 	
-		<div class="right mt-5">
-		<h5>Login</h5>
+		<div class="right mt-5 text-center">
+		<h2>Login</h2>
 		<br><br>
 		<form action="/login" method="post">
 		<div class="inputs">
-			<input type="text" placeholder="username" name="username" required>
-			<br>
-			<input type="password" placeholder="contraseña" name="password" required>
-		</div>	
+			<input type="text" class="form-control mb-3" placeholder="username" name="username" required>
 			
-			<br><br>
+			<input type="password" class="form-control mb-4" placeholder="contraseña" name="password" required>
+		</div>	
 
-			<br>
-			<button type="submit">Login</button>
+                <button type="submit" class="btn btn-fill btn-primary">Iniciar sesion</button>
+
 		</form>
 
-			<br><br>
+			<br>
 			<br>	
 			<p>¿No tienes una cuenta? <a href="/register">Crea tu cuenta</a> toma menos de un minuto</p>
 	</div>

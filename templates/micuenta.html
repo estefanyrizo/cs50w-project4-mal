@@ -9,67 +9,117 @@ Mi cuenta
 {% block main %}
 
 <div class="content">
-  
-    <div class="container mt-5">
-      <div class="row justify-content-center">
-    
-        <div class="col-12 col-md-6">
-          <div class="card">
+  <div class="row mi-cuenta">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="sign pt-2 pb-2 text-center">Perfil</h3>
+        </div>
+        
+        {%for usuario in usuario%}
+        <div class="card-body">
+          <div class="card card-user">
             <div class="card-body">
-              <h5 class="card-title text-center">Tus Datos de usuario :D</h5>
-              <div class="mb-3 row">
-                  {%for datos in usuario%}
-                <label for="username" class="col-sm-4 col-form-label">Username:</label>
-                <div class="col-sm-8">
-                  <input type="text" form="update-my-profile" class="form-control" id="username"  name="username"
-                    placeholder="panchito perez" disabled value="{{datos["username"]}}"></div>
-    
+              <p class="card-text">
+              <div class="author">
+                <div class="block block-one"></div>
+                <div class="block block-two"></div>
+                <div class="block block-three"></div>
+                <div class="block block-four"></div>
+                {% if session["perfil"] %}
+                <img class="avatar" src="{{session["perfil"]}}" alt="...">
+                {% else %}
+                <img class="avatar" id="img-preview">
+                {% endif %}
+                <br>
+                <label for="img-uploader"> Editar foto de perfil</label>
+                <input type="file" id="img-uploader" required accept="image/*" hidden>
+                <input name="perfil" id="url" hidden>
+                <h5 class="title">{{usuario["username"]}}</h5>
               </div>
-              <div class="mb-3 row">
-                <label for="email" class="col-sm-4 col-form-label">Nombre:</label>
-                <div class="col-sm-8">
-                  <input type="email" form="update-my-profile" class="form-control" id="email" name="email"
-                    placeholder="sinpanza@quisieraestar.com" disabled value="{{datos["nombre"]}}">
+              <div class="row">
+                <div class="col-md-5 pr-md-1">
+                  <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" class="form-control" placeholder="Username" value="{{usuario["username"]}}"
+                      name="username" disabled>
+                  </div>
                 </div>
-              </div>
-              
-              <div class="mb-3 row">
-                <label for="cycle-group" class="col-sm-4 col-form-label">Apellido:</label>
-                <div class="col-sm-8">
-                  <input type="text" form="update-my-profile" class="form-control" id="cycle-group" name="cycle-group"
-                    placeholder="{{datos["apellido"]}}" disabled value="{{datos["apellido"]}}">
-                </div>
-              </div>
-              
-              <div class="mb-3 row">
-                <label for="phone" class="col-sm-4 col-form-label">Teléfono:</label>
-                <div class="col-sm-8">
-                  <input type="tel" form="update-my-profile" class="form-control" id="phone" name="phone" placeholder="{{datos["numero_telefono"]}}" required
-                    value="{{datos["telefono"]}}">
-                </div>
-              </div>
-              <div class="mb-3 row">
-                <label for="correp" class="col-sm-4 col-form-label">Correo:</label>
-                <div class="col-sm-8">
-                  <input type="text" form="update-my-profile" class="form-control" id="correo" name="correo" placeholder="{{datos["correo"]}}" required
-                    value="{{datos["correo"]}}">
-                </div>
-              </div>
-              
-            </div>
 
-            {%endfor%}
-            <div class="card-footer d-flex p-1 m-1">
-              <form action="/micuenta" id="update-my-profile" method="post">
-              <input type="hidden" name="csrfmiddlewaretoken" value="RV5mrgHzkbPJwc5tZ5VRsWVfNpv8UxabHPILxeOnMbanZBeZ8uaU4sRE3r5zdvMM">
-                <input type="submit" value="Editar información" class="submit">
+                <div class="col-md-3 pr-md-1">
+                  <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" class="form-control" form="update-my-profile" value="{{usuario["nombre"]}}"
+                      placeholder="Nombre" name="nombre" required>
+                  </div>
+                </div>
+                <div class="col-md-3 pl-md-1">
+                  <div class="form-group">
+                    <label>Apellido</label>
+                    {% if usuario["apellido"] %}
+                    <input type="text" class="form-control" form="update-my-profile" value="{{usuario["apellido"]}}"
+                      name="apellido" required>
+                    {% else %}
+                    <input type="text" class="form-control" form="update-my-profile" placeholder="Apellido"
+                      name="apellido">
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-5 pr-md-1">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    {% if usuario["correo"] %}
+                    <input type="email" class="form-control" form="update-my-profile" value="{{usuario["correo"]}}"
+                      name="correo" required>
+                    {% else %}
+                    <input type="email" class="form-control" form="update-my-profile" placeholder="Correo"
+                      name="correo">
+                    {%endif%}
+                  </div>
+                </div>
+
+                <div class="col-md-5 pl-md-1">
+                  <div class="form-group">
+                    <label>Telefono</label>
+                    {% if usuario["telefono"] %}
+                    <input type="text" class="form-control" form="update-my-profile" value="{{usuario["telefono"]}}"
+                      name="telefono" required>
+                    {% else %}
+                    <input type="text" class="form-control" form="update-my-profile" placeholder="Telefono"
+                      name="telefono">
+                    {% endif%}
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label>Acerca de mi</label>
+                    {% if usuario["biografia"]%}
+                    <input type="text" class="form-control" form="update-my-profile" value="{{usuario["biografia"]}}"
+                      name="biografia" required>
+                    {% else %}
+                    <input type="text" class="form-control" form="update-my-profile"
+                      placeholder="Aca puede estar tu descripción" name="biografia">
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
               </form>
-              <a href="/actualizarcontraseña" class="submit ml-5">Cambiar contraseña</a>
+            </div>
+            <div class="card-footer">
+              <form action="/micuenta" id="update-my-profile" method="post">
+                <input type="submit" value="Guardar" class="btn btn-primary" data-toggle="modal" data-target="#GuadarInfo" style="height: 100%;">
+              </form>
             </div>
           </div>
         </div>
-    
       </div>
     </div>
-    </div>
-{% endblock %}
+    {% endfor %}
+  </div>
+  {% endblock %}

@@ -1,0 +1,84 @@
+{% extends "layout.html" %} {% block title %} {{coreo["titulo"]}} {% endblock %}
+{% block main %} {% if coreo %}
+
+<br>
+<div class="container" id="contenido">
+  <div class="row no-gutters" id="info_coreo">
+    <div class="window">
+      <div class="coreo-info">
+        <h3 class="text-center">{{coreo['titulo']}}</h3>
+        <div class="line"></div>
+        <tbody>
+          <div class="video">
+            <video autoplay controls src="{{coreo['enlace']}}"></video>
+          </div>
+          <br>
+          <div class="info">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h3>Descripcion</h3>
+              </div>
+              <div class="likes">
+                <h1 class="pr-2" id="corazon" style="cursor: context-menu;" onclick="likes({{coreo['id']}})">❤
+                </h1>
+                <h3 id="cont">{{likes}}</h3>
+              </div>
+            </div>
+            <p>{{coreo['descripcion']}}</p>
+            <br>
+            <h3>Coreografo</h3>
+            <p>{{coreo['coreografo']}}</p>
+            <div class="line"></div>
+          </div>
+        </tbody>
+      </div>
+    </div>
+
+    <script>
+      function likes(id){
+        parametrs = {
+          id : id
+        }
+        $.getJSON("/likes?id=" + id, function(data){
+          if(data["me_gusta"] == false){
+            $("#cont").text(parseInt($("#cont").text()) - 1);
+            $("#corazon").css("color", "white");
+          }
+          if(data["me_gusta"] == true){
+            $("#cont").text(parseInt($("#cont").text()) + 1);
+            $("#corazon").css("color", "pink");
+          }
+        });
+      };
+    </script>
+
+    {% endif %}
+
+    <div class='reseñas-info'>
+      <div class='reseñas-info-content'>
+        {% for com in comentarios %}
+        <div class="reviews">
+          <h4>{{com['username']}}</h4>
+          <p>{{com['comentario']}}</p>
+        </div>
+        {% endfor %}
+
+        <form action="{{coreo['id']}}" method="POST">
+          <br>
+
+          <div class="line"></div>
+          <div id="comentar">
+            <h3>Di algo acerca de esta coreografia:</h3>
+            <br>
+            <textarea id="comentario" name="comentario" placeholder="Escribe un comentario..." rows="2" cols="150"
+              required></textarea>
+            <br>
+            <br>
+            <input class="btn btn-primary" type="submit" value="Comentar" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

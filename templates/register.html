@@ -1,47 +1,37 @@
-{% extends "layout.html" %}
-
-{%block title%}
-
-Register
-
-{% endblock%}
-
-{% block main%}
+{% extends "layout.html" %} {%block title%} Register {% endblock%} {% block main%}
 
 
 <div class="box-form">
-	<div class="left">
-		<div class="overlay">
-		<h1>Asi se baila</h1>
-		<p>La vida es corta y siempre habrá platos sucios, así que vamos a bailar.</p>
-		</div>
-	</div>
-	
-		<div class="right mt-5">
-		<h5>Register</h5>
-		<br><br>
-		<form action="/register" method="post">
-		<div class="inputs">
-			<input type="text" placeholder="username" name="username" required>
-			<br>
-            <input type="text" placeholder="nombre" name="nombre" required>
-            <input type="text" placeholder="apellido" name="apellido" required>
-			<input type="password" placeholder="contraseña" name="password" required>
-            <br>
-            <input type="password" placeholder="Confirmar contraseña" name="confirmation" required>
+    <div class="left">
+        <div class="overlay">
+            <h1>Asi se baila</h1>
+            <p>La vida es corta y siempre habrá platos sucios, así que vamos a bailar.</p>
+        </div>
+    </div>
 
-		</div>	
-			
-			<br><br>
+    <div class="right mt-5 text-center">
+        <h2>Register</h2>
+        <br><br>
+        <form action="/register" method="post">
+            <div class="inputs">
+                <input type="text" placeholder="username"class="form-control mb-3" name="username" required>
+                
+                <input type="text" placeholder="nombre" class="form-control mb-3" name="nombre" required>
+                
+                <input type="password" class="form-control mb-3" placeholder="contraseña" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$" name="password" required>
+                <small id="emailHelp" class="form-text text-muted text-center">Al menos una mayuscula, minuscula, numero, simbolo y entre 8-16 caracteres.</small>
+                <br>  
+                <input type="password" class="form-control mb-4" placeholder="Confirmar contraseña" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,16}$" name="confirmation" required>
 
-			<br>
-			<button type="submit">Login</button>
-		</form>
+            </div>
 
-			<br><br>
-			<br>	
-			<p>¿Ya tienes una cuenta? <a href="/login">Inicia sesion</a> y vamos a bailar</p>
-	</div>
-	
+            <button type="submit" class="btn btn-fill btn-primary">Registrarse</button>
+        </form>
+
+        <br><br>
+        <br>
+        <p>¿Ya tienes una cuenta? <a href="/login">Inicia sesion</a> y vamos a bailar</p>
+    </div>
+
 </div>
 {% endblock %}

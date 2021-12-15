@@ -1,0 +1,41 @@
+{% extends "layout.html" %} {%block title%} Registra admin {% endblock%} {% block main%}
+
+<div class="content">
+    <div class="row mi-cuenta">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="sign pt-2 pb-2" align="center"> Registrar Administrador</h3>
+                    <form action="/registrar" method="post">
+                        <div class="form-group">
+                            <div class="inputs">
+                                <input type="text" class="form-control" placeholder="username" name="username" required>
+                                <br>    
+                                <input type="text" class="form-control" placeholder="nombre" name="nombre" required>
+                                <br> 
+                                <input type="text" class="form-control" placeholder="apellido" name="apellido" required>
+                                <br>    
+                                <input type="password" class="form-control" placeholder="contraseña" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" name="password" required>
+                                <br>
+                                <small id="emailHelp" class="form-text text-muted text-center">Al menos una mayuscula, minuscula,
+                                    numero, simbolo y entre 8-12 caracteres.</small>
+                                <br>    
+                                <input type="password" class="form-control" placeholder="Confirmar contraseña" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" name="confirmation" required>
+
+                            </div>
+                        </div>
+
+                        <br>
+                        <button type="submit" class="btn btn-fill btn-primary">Registrar</button>
+
+                        <br><br><br>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

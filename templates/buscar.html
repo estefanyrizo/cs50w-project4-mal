@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{%block title%}
+
+Buscar
+
+{% endblock%}
+
+{% block main%}
+<br>
+{% if request.args.get("search") and coreos %}
+
+<div class="content">
+    <div class="row mi-cuenta">
+        <div class="col-md-8">
+            <h3 class="sign pt-2 pb-2 text-center">Resultados de la busqueda: {{request.args.get("search")}}</h3>
+            <div class="items">
+            {% for coreo in coreos%}
+                <div class="items">
+                    <div class="row no-gutters">
+                        <div class="col-md-3">
+                            <img class="portada_coreo" src="{{coreo['portada']}}">
+                        </div>
+                        <div class="col-md-5">
+                            <div class="info-coreos">
+                                <h3 class="card-title">{{coreo['titulo']}}</h3>
+                                <h5>{{coreo['coreografo']}}</h5>
+                                <h4>{{coreo['descripcion']}}</h4>
+                                <a href="/coreografia/{{coreo['id']}}" class="btn btn-primary"> Mas información</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+
+{% endblock%}
