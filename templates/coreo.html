@@ -19,6 +19,7 @@
                 <h3>Descripcion</h3>
               </div>
               <div class="likes">
+  
                 <h1 class="pr-2" id="corazon" style="cursor: context-menu;" onclick="likes({{coreo['id']}})">❤
                 </h1>
                 <h3 id="cont">{{likes}}</h3>
@@ -33,24 +34,6 @@
         </tbody>
       </div>
     </div>
-
-    <script>
-      function likes(id){
-        parametrs = {
-          id : id
-        }
-        $.getJSON("/likes?id=" + id, function(data){
-          if(data["me_gusta"] == false){
-            $("#cont").text(parseInt($("#cont").text()) - 1);
-            $("#corazon").css("color", "white");
-          }
-          if(data["me_gusta"] == true){
-            $("#cont").text(parseInt($("#cont").text()) + 1);
-            $("#corazon").css("color", "pink");
-          }
-        });
-      };
-    </script>
 
     {% endif %}
 

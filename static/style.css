@@ -134,7 +134,7 @@
   width: 100%;
 }
 
-.top-musica {
+.coreos {
   max-width: 100%;
   padding-left: 0;
   margin-left: 0;
@@ -145,7 +145,7 @@
   text-align: center;
 }
 
-.top-musica .card {
+.coreos .card {
   max-width: 18%;
   color: white;
   background-color: transparent;
@@ -154,25 +154,54 @@
   margin-right: 0.5%;
 }
 
-.top-musica .boton, .top-musica .boton:hover, .top-musica .boton:focus {
+.coreos .boton, .coreos .boton:hover, .coreos .boton:focus {
   border-color: transparent;
   background-color: transparent;
 }
 
-.top-musica .img-top {
+.coreos .img-top {
   width: 150%;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.top-musica .card-title {
+.coreos .card-title {
   margin-top: 10%;
 }
 
-.top-musica .music-top-box {
+.coreos .coreo-box {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+#carousel-img {
+  height: 50vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center -50px;
+     object-position: center -50px;
+}
+
+#cont_buscar {
+  z-index: 1;
+  position: absolute;
+  bottom: 12%;
+}
+
+#search {
+  width: 60vw;
+  margin-bottom: 1%;
+}
+
+#div_buscar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
 }
 
 .coreo-info {

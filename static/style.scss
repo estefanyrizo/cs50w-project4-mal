@@ -118,7 +118,7 @@ $mainColor: #333333;
   width: 100%;
 }
 
-.top-musica
+.coreos
 {
     max-width: 100%;
     padding-left: 0;
@@ -156,12 +156,35 @@ $mainColor: #333333;
 		margin-top: 10%;
 	}
 
-	.music-top-box
+	.coreo-box
 	{
 		justify-content: center;
 	}
 }
+    
 
+#carousel-img{
+    height: 50vh;
+    object-fit: cover;
+    object-position: center -50px;
+}
+
+#cont_buscar{
+    z-index: 1;
+    position: absolute;
+    bottom: 12%;
+}
+    
+#search{
+    width: 60vw;
+    margin-bottom: 1%;
+}
+
+#div_buscar{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 
 .coreo-info {
 width: 100%;

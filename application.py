@@ -34,62 +34,35 @@ Session(app)
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
 @login_required
 def index():
+    return render_template("index.html")
 
-    if request.method == "GET":
-        ritmos = db.execute("SELECT * FROM ritmos")
-        data = []
-        datos = []
-        datosa = []
-        coreos = []
 
-        for ritmo in ritmos:
-            coreografias = db.execute(f"SELECT * FROM coreografias WHERE estado = true AND ritmo_id = {ritmo['id']}")
-        
-            for coreo in coreografias:
-                data = {
-                    "id" : coreo["id"],
-                    "titulo" : coreo["titulo"],
-                    "portada" : coreo["portada"],
-                }
-                coreos.append(data)
-
-            datosa = {
-                "ritmo" : ritmo["nombre"],
-                "info" : coreos
-            }
-            
-
-            datos.append(datosa)
-
-        return render_template("index.html",coreos = datos)
-
-    if request.method == "POST":
-        coreo = request.form.get("coreo")
-        return redirect(f"/busqueda?search={coreo}")
-
-@app.route("/busqueda", methods=["GET", "POST"])
+@app.route("/search", methods=["GET", "POST"])
 @login_required
 def busqueda():
-    q = request.args.get("search")
-    coreo = db.execute(f"SELECT c.id, titulo, descripcion, portada, co.nombre AS coreografo, ri.nombre AS ritmo from coreografos AS co INNER JOIN coreografias as c ON (coreografo_id = co.id) INNER JOIN ritmos as ri on (ritmo_id = ri.id) WHERE c.estado = true AND (UPPER(co.nombre) LIKE UPPER('%{q}%') OR UPPER(c.titulo) LIKE UPPER('%{q}%') OR UPPER(ri.nombre) LIKE UPPER('%{q}%')) LIMIT 5").fetchall()
-    if not coreo:
-        flash(f"No encontre la coreografia {q}:c","error")
-        return redirect("/")
-    coreos = []
-    for coreo in coreo:
-        data = {
-            "id" : coreo["id"],
-            "titulo" : coreo['titulo'], 
-            "descripcion" : coreo["descripcion"],
-            "portada" : coreo["portada"],
-            "ritmo" : coreo["ritmo"],
-            "coreografo": coreo["coreografo"],
-        }
-        coreos.append(data)
-    return render_template("buscar.html", coreos = coreos)
+    q = request.args.get("q")
+    rit_id = request.args.get('rit_id', type = int)
+    print(q)
+    if q and not rit_id:
+        coreografias = db.execute(f"SELECT c.id, titulo, descripcion, portada, co.nombre AS coreografo, ri.nombre AS ritmo from coreografos AS co INNER JOIN coreografias as c ON (coreografo_id = co.id) INNER JOIN ritmos as ri on (ritmo_id = ri.id) WHERE c.estado = true AND (UPPER(co.nombre) LIKE UPPER('%{q}%') OR UPPER(c.titulo) LIKE UPPER('%{q}%') OR UPPER(ri.nombre) LIKE UPPER('%{q}%')) LIMIT 5")
+        if not coreografias.fetchone():
+            flash(f"No encontre la coreografia {q}:c","error")
+            return redirect("/")
+        data = []
+        for coreo in coreografias:
+            data.append(dict(coreo))
+        return jsonify(data)
+
+    elif rit_id and not q:
+        coreografias = db.execute(f"SELECT * FROM coreografias WHERE estado = true")
+        data = []
+        for coreo in coreografias:
+            data.append(dict(coreo))
+        return jsonify(data)
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -175,10 +148,7 @@ def micuenta():
         nombre = request.form.get('nombre')
         apellido = request.form.get('apellido')
         
-        if not request.form.get('perfil'):
-            flash("NO ENCONTRE FOTO", "error")
-            return redirect("/")
-        print(request.form.get("perfil"), apellido)
+        foto = request.form.get("perfil")
 
         if correo:
             db.execute(f"UPDATE users SET correo = '{correo}' WHERE id = {session['user_id']}")
@@ -322,7 +292,7 @@ def coreografia(id):
             comentarios = db.execute(f"SELECT comentario, username FROM comentarios AS c INNER JOIN users AS u ON c.user_id = u.id WHERE c.coreo_id = {id} limit 5")
             likes = db.execute(f"SELECT * FROM likes WHERE coreo_id = {id} and me_gusta = true").rowcount
             me_gusta = db.execute(f"SELECT * FROM likes WHERE coreo_id = {id} and me_gusta = true AND user_id = {session['user_id']}").fetchone()
-            return render_template("coreo.html", coreo = coreo, comentarios=comentarios, likes=likes)
+            return render_template("coreo.html", coreo = coreo, comentarios=comentarios, likes=likes, me_guta = me_gusta)
 
         else:
         

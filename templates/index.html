@@ -14,134 +14,126 @@ Home
   -->
     <div class="sidebar-wrapper">
       <div class="logo">
-        <a href="javascript:void(0)" class="simple-text logo-mini">
-          CT
-        </a>
-        <a href="javascript:void(0)" class="simple-text logo-normal">
-          Ritmos
-        </a>
       </div>
       <ul class="nav">
         <li>
-          <a href="./dashboard.html">
-            <p>Ballet</p>
-          </a>
-        </li>
-        <li>
-          <a href="./icons.html">
+          <a id="rit_6">
             <p>Bachata</p>
           </a>
         </li>
         <li>
-          <a href="./map.html">
+          <a id="rit_1">
+            <p>Ballet</p>
+          </a>
+        </li>
+        <li>
+          <a id="rit_7">
             <p>Bolero</p>
           </a>
         </li>
         <li>
-          <a href="./notifications.html">
+          <a id="rit_18">
             <p>Break dance"</p>
           </a>
         </li>
         <li>
-          <a href="./user.html">
+          <a id="rit_8">
             <p>Cha-cha-chá</p>
           </a>
         </li>
         <li>
-          <a href="./tables.html">
+          <a id="rit_9">
             <p>Cumbia</p>
           </a>
         </li>
         <li>
-          <a href="./typography.html">
+          <a id="rit_16">
             <p>Hip Hop</p>
           </a>
         </li>
         <li>
-          <a href="./typography.html">
+          <a id="rit_10">
             <p>Kizomba</p>
           </a>
         </li>
         <li>
-          <a href="./rtl.html">
+          <a id="rit_17">
             <p>K-pop</p>
           </a>
         </li>
-        <li class="active-pro">
-          <a href="./upgrade.html">
+        <li>
+          <a id="rit_12">
             <p>Merengue</p>
           </a>
         </li>
-        <li class="active-pro">
-          <a href="./upgrade.html">
+        <li>
+          <a id="rit_15">
             <p>Mambo</p>
           </a>
         </li>
-        <li class="active-pro">
-          <a href="./upgrade.html">
+        <li>
+          <a id="rit_12">
             <p>Reggaetón</p>
           </a>
         </li>
-        <li class="active-pro">
-          <a href="./upgrade.html">
+        <li>
+          <a id="rit_3">
             <p>Rock & Roll</p>
           </a>
         </li>
-        <li class="active-pro">
-          <a href="./upgrade.html">
+        <li>
+          <a id="rit_13">
             <p>Salsa y Rueda Cubana</p>
           </a>
         </li>
-        <li class="active-pro">
-          <a href="./upgrade.html">
+        <li>
+          <a id="rit_14">
             <p>Samba</p>
           </a>
         </li>
-        <li class="active-pro">
-          <a href="./upgrade.html">
+        <li>
+          <a id="rit_2">
             <p>Tango</p>
           </a>
         </li>
-        <li class="active-pro">
-          <a href="./upgrade.html">
+        <li>
+          <a id="rit_4">
             <p>Vals Francés o Pericón</p>
           </a>
         </li>
-        <li class="active-pro">
-          <a href="./upgrade.html">
+        <li>
+          <a id="rit_18">
             <p>Vals Inglés</p>
           </a>
         </li>
-
       </ul>
     </div>
   </div>
+  {% block navbar%}
+  <div class="navbar-toggle d-inline">
+    <button type="button" class="navbar-toggler">
+      <span class="navbar-toggler-bar bar1"></span>
+      <span class="navbar-toggler-bar bar2"></span>
+      <span class="navbar-toggler-bar bar3"></span>
+    </button>
+  </div>
+  {% endblock %}
 
 <br>
 
-<div>
-  <form action="/" method="post" class="form-inline pt-5 mt-5 justify-content-center">
+<div class="container-fluid text-center" id="cont_buscar">
+  <div id="div_buscar">
     <input class="form-control" id="search" autocomplete="on" autofocus class="form-control" name="coreo"
-      placeholder="Coreografo, categoria, cancion" type="text" />
-
-    <button class="btn btn-fill btn-primary" type="submit"><i class="fas fa-search"></i></button>
-  </form>
+      placeholder="Coreografo, ritmo, titulo" type="text" />
+  </div>
+    <button class="btn btn-fill btn-primary" id="btn_buscar"><i class="fas fa-search"></i></button>
 </div>
 
-{% for coreo in coreos%}
 
-  <div class="top-musica">
-    <h3 >{{coreo["ritmo"]}}</h3>
-    <div class="music-top-box row d-flex">
-        {% for info in coreo["info"]%}
-        <div class="card mt-2 mb-0 mr-2 ml-2">
-          <a href="coreografia/{{info["id"]}}" class="boton p-0 m-0"><img class="img-top" src="{{info["portada"]}}"></a>
-          <h5 class="card-title">{{info["titulo"]}}</h5>
-      </div>
-        {%endfor%}
+  <div class="coreos">
+    <div class="coreo-box row d-flex" id="coreo">
     </div>
   </div>
 
-{% endfor %}
 
 {% endblock%}

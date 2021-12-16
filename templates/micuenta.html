@@ -27,14 +27,14 @@ Mi cuenta
                 <div class="block block-three"></div>
                 <div class="block block-four"></div>
                 {% if session["perfil"] %}
-                <img class="avatar" src="{{session["perfil"]}}" alt="...">
+                <img class="avatar" src="{{session["perfil"]}}" id="img-preview">
                 {% else %}
                 <img class="avatar" id="img-preview">
                 {% endif %}
                 <br>
                 <label for="img-uploader"> Editar foto de perfil</label>
                 <input type="file" id="img-uploader" required accept="image/*" hidden>
-                <input name="perfil" id="url" hidden>
+                <input name="perfil" id="url" hidden form="update-my-profile">
                 <h5 class="title">{{usuario["username"]}}</h5>
               </div>
               <div class="row">
